@@ -1,0 +1,187 @@
+{
+	"info": {
+		"_postman_id": "d29e17bf-76fb-4602-9e29-36d9441bb910",
+		"name": "auth",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24760384"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let request;\r",
+									"let response;\r",
+									"\r",
+									"request = JSON.parse(pm.request.body.raw)\r",
+									"response = pm.response.json()\r",
+									"\r",
+									"\r",
+									"if (request.login === \"wesley2\") {\r",
+									"    pm.collectionVariables.set(\"tokenUser\", response.token);\r",
+									"}\r",
+									"\r",
+									"if (request.login === \"wesley\") {\r",
+									"    pm.collectionVariables.set(\"tokenAdmin\", response.token);\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"login\": \"wesley3\",\r\n    \"password\": \"wesley123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"login\": \"wesley\",\r\n    \"password\": \"wesley123\",\r\n    \"role\": \"ADMIN\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "sample user",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhdXRoLWFwaTEiLCJzdWIiOiJ3ZXNsZXkiLCJyb2xlIjoiQURNSU4iLCJleHAiOjE3NDc5NDQ0MDd9.HLdfLBdEXpOJdueEIK7e5LbwwXa9ewXr6CsWuTjFlgs",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/sample/user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"sample",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sample admin",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{tokenAdmin}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhdXRoLWFwaTEiLCJzdWIiOiJ3ZXNsZXkiLCJyb2xlIjoiQURNSU4iLCJleHAiOjE3NDc5NDQ0MDd9.HLdfLBdEXpOJdueEIK7e5LbwwXa9ewXr6CsWuTjFlgs",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/sample/admin",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"sample",
+						"admin"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "tokenUser",
+			"value": ""
+		},
+		{
+			"key": "tokenAdmin",
+			"value": ""
+		}
+	]
+}
