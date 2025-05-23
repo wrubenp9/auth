@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: auth-api
+  datasource:
+    url: jdbc:postgresql://localhost:5400/authDB
+    username: admin
+    password: admin
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+api:
+  security:
+    token:
+      secret: ${JWT_SECRET:my-secret-key}
